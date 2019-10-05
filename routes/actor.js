@@ -1,8 +1,10 @@
 var express = require("express");
-var { returnValidationErrors, validateActor } = require("../middleware/validation");
+var { returnValidationErrors, validateAvatarUrl, validateId, validateAvatarUrl } = require("../middleware/validation");
 var router = express.Router();
-const { addActor } = require("../controllers/actors");
+const { getAllActors, updateActor } = require("../controllers/actors");
 
 // Routes related to actor.
 
+router.get("/", getAllActors);
+router.put("/:id", validateId, validateAvatarUrl, returnValidationErrors, updateActor)
 module.exports = router;
